@@ -6,9 +6,9 @@
 #.outputs o
 #
 # Connecting the outputs of the two and gates to an xor gate (creating a miter).
-#.subckt and_gate1 A=a B=b X=TEMP0
-#.subckt and_gate2 C=a D=b Y=TEMP1
-#.subckt xor_gate E=TEMP0 F=TEMP1 Z=o
+#.subckt and_gate1 x0=a x1=b f=TEMP0
+#.subckt and_gate2 x0=a x1=b f=TEMP1
+#.subckt xor_gate x0=TEMP0 x1=TEMP1 f=o
 #.end
 
 # An and-gate and an or-gate connected to a miter
@@ -17,25 +17,25 @@
 .outputs o
 
 # Connecting the outputs of the and_gate and the or-gate to an xor gate (creating a miter).
-.subckt and_gate1 A=a B=b X=TEMP0
-.subckt or_gate G=a H=b W=TEMP1
-.subckt xor_gate E=TEMP0 F=TEMP1 Z=o
+.subckt and_gate1 x0=a x1=b f=TEMP0
+.subckt or_gate x0=a x1=b f=TEMP1
+.subckt xor_gate x0=TEMP0 x1=TEMP1 f=o
 .end
 
 # xor-gate logic
 .model xor_gate
-.inputs E F
-.outputs Z
-.names E F Z
+.inputs x0 x1
+.outputs f
+.names x0 x1 f
 01 1
 10 1
 .end
 
 # or-gate logic
 .model or_gate
-.inputs G H
-.outputs W
-.names G H W
+.inputs x0 x1
+.outputs f
+.names x0 x1 f
 01 1
 10 1
 11 1
@@ -43,16 +43,16 @@
 
 # and-gate 1 logic
 .model and_gate1
-.inputs A B
-.outputs X
-.names A B X
+.inputs x0 x1
+.outputs f
+.names x0 x1 f
 11 1
 .end
 
 # and-gate 2 logic
 .model and_gate2
-.inputs C D
-.outputs Y
-.names C D Y
+.inputs x0 x1
+.outputs f
+.names x0 x1 f
 11 1
 .end
