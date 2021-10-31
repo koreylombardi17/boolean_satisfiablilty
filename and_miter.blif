@@ -1,4 +1,4 @@
-# This should be unsatisfiable representing an equivalent circuit
+# This should return unsatisfiable representing an equivalent circuit
 # I commented this out because I tested it already, now testing and_or miter underneath the comments.
 # 2-and gates connected to a miter
 #.model two_ands_miter
@@ -11,6 +11,7 @@
 #.subckt xor_gate x0=TEMP0 x1=TEMP1 f=o
 #.end
 
+# This should return satisfiable representing a circuit that is not equivalent.
 # An and-gate and an or-gate connected to a miter
 .model and_or_miter
 .inputs a b
