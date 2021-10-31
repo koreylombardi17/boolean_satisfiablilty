@@ -1,0 +1,104 @@
+# This program comapares 2 circuits checking for equivalence by using a miter and doing
+# a satisfiabilitiy check on the 2. Unsat means they are equivalent, sat means they are
+# not equivalent.
+
+# Miter used to compare circuit1 and cicuit2
+.model and_or_miter
+.inputs a b c d e
+.outputs o
+
+# Connecting the outputs of circuit1 and circuit2 to an xor gate (creating a miter).
+#.subckt circuit1 x0=a x1=b x2=c x3=d x4=e f=TEMP0
+#.subckt circuit2 x0=a x1=b x2=c x3=d x4=e f=TEMP1
+#.subckt xor_gate x0=TEMP0 x1=TEMP1 f=o
+#.end
+
+# Connecting the outputs of circuit1 and circuit3 to an xor gate (creating a miter).
+#.subckt circuit1 x0=a x1=b x2=c x3=d x4=e f=TEMP0
+#.subckt circuit3 x0=a x1=b x2=c x3=d x4=e f=TEMP1
+#.subckt xor_gate x0=TEMP0 x1=TEMP1 f=o
+#.end
+
+# Connecting the outputs of circuit2 and circuit3 to an xor gate (creating a miter).
+.subckt circuit2 x0=a x1=b x2=c x3=d x4=e f=TEMP0
+.subckt circuit3 x0=a x1=b x2=c x3=d x4=e f=TEMP1
+.subckt xor_gate x0=TEMP0 x1=TEMP1 f=o
+.end
+
+# xor-gate logic
+.model xor_gate
+.inputs x0 x1
+.outputs f
+.names x0 x1 f
+01 1
+10 1
+.end
+
+# circuit 1
+.model circuit1
+.inputs x0 x1 x2 x3 x4
+.outputs f
+.names x0 x1 x2 x3 x4 f
+11111 1
+01110 1
+10110 1
+00111 1
+11010 1
+01011 1
+10011 1
+00010 1
+11100 1
+01101 1
+10101 1
+00100 1
+11001 1
+01000 1
+10000 1
+00001 1
+.end
+
+# circuit 2
+.model circuit2
+.inputs x0 x1 x2 x3 x4
+.outputs f
+.names x0 x1 x2 x3 x4 f
+11111 1
+01110 1
+10110 1
+00111 1
+11010 1
+01011 1
+10011 1
+00010 1
+11100 1
+01101 1
+10101 1
+00100 1
+11001 1
+01000 1
+10000 1
+00001 1
+.end
+
+# circuit 3
+.model circuit3
+.inputs x0 x1 x2 x3 x4
+.outputs f
+.names x0 x1 x2 x3 x4 f
+11111 1
+01110 1
+10110 1
+00111 1
+11010 1
+01011 1
+10011 1
+00010 1
+11100 1
+10101 1
+00100 1
+11001 1
+01000 1
+10101 1
+10000 1
+00001 1
+.end
