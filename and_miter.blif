@@ -1,0 +1,58 @@
+# This should be unsatisfiable representing an equivalent circuit
+# I commented this out because I tested it already, now testing and_or miter underneath the comments.
+# 2-and gates connected to a miter
+#.model two_ands_miter
+#.inputs a b
+#.outputs o
+#
+# Connecting the outputs of the two and gates to an xor gate (creating a miter).
+#.subckt and_gate1 A=a B=b X=TEMP0
+#.subckt and_gate2 C=a D=b Y=TEMP1
+#.subckt xor_gate E=TEMP0 F=TEMP1 Z=o
+#.end
+
+# An and-gate and an or-gate connected to a miter
+.model and_or_miter
+.inputs a b
+.outputs o
+
+# Connecting the outputs of the and_gate and the or-gate to an xor gate (creating a miter).
+.subckt and_gate1 A=a B=b X=TEMP0
+.subckt or_gate G=a H=b W=TEMP1
+.subckt xor_gate E=TEMP0 F=TEMP1 Z=o
+.end
+
+# xor-gate logic
+.model xor_gate
+.inputs E F
+.outputs Z
+.names E F Z
+01 1
+10 1
+.end
+
+# or-gate logic
+.model or_gate
+.inputs G H
+.outputs W
+.names G H W
+01 1
+10 1
+11 1
+.end
+
+# and-gate 1 logic
+.model and_gate1
+.inputs A B
+.outputs X
+.names A B X
+11 1
+.end
+
+# and-gate 2 logic
+.model and_gate2
+.inputs C D
+.outputs Y
+.names C D Y
+11 1
+.end
